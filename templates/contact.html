@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "bootstrap4/form.html" import render_form %}
+
+{% block content %}
+<!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg2.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+          {% if not current_user.is_authenticated: %}
+            <h1>Sorry</h1>
+            <span class="subheading">Only known users can leave a message. Please log in.</span>
+          {% else: %}
+            {% if msg_sent: %}
+            <h2>Successfully sent your message!</h2>
+            {% else %}
+            <h1>Contact Me</h1>
+            <span class="subheading">Have questions? Fell free to ask.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h2>Hey {{ current_user.name }}!</h2>
+        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+        <!-- Contact Form -->
+              {{ render_form(form, novalidate=True) }}
+            {% endif %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+  <hr>
+{% endblock %}
